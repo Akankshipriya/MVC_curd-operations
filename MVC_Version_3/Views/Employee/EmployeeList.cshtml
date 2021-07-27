@@ -1,0 +1,68 @@
+﻿@model IEnumerable< MVC_Version_3.Models.Employee>
+
+@{
+    ViewBag.Title = "EmployeeList";
+}
+
+<h2>EmployeeList</h2>
+<table class="table">
+    <tr>
+        <th>
+            EmployeeId
+        </th>
+        <th>
+            Department ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Date of Joining
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Address
+        </th>
+    </tr>
+    @foreach (var result in Model)
+    {
+        <tr>
+            <td>
+                @result.EmployeeId
+            </td>
+            <td>
+                @result.DeptID
+            </td>
+            <td>
+                @result.Name
+            </td>
+            <td>
+                @result.DOJ
+            </td>
+            <td>
+                @result.Mobile
+            </td>
+            <td>
+                @result.Email
+            </td>
+            <td>
+                @result.Address
+            </td>
+            <td>
+                @Html.ActionLink("Update", "EmployeeEdit", new { id = result.EmployeeId})
+            </td>
+            <td>
+                |
+                @Html.ActionLink("Delete", "EmployeeDelete", new { id = result.EmployeeId })
+            </td>
+
+        </tr>
+    }
+</table>
+
+

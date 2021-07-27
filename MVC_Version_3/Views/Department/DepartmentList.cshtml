@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MVC_Version_3.Models.Department>
+
+@{
+    ViewBag.Title = "DepartmentList";
+}
+
+<h2>DepartmentList</h2>
+<table class="table">
+    <tr>
+        <th>
+            Department ID
+        </th>
+        <th>
+            Department Name
+        </th>
+        <th>
+            Department Description
+        </th>
+        <th>
+
+        </th>
+        
+
+    </tr>
+    @foreach (var result in Model)
+    {
+<tr>
+
+    <td>
+        @result.DeptID
+    </td>
+    <td>
+        @result.DptName
+    </td>
+    <td>
+        @result.Description1
+    </td>
+    <td>
+        @Html.ActionLink("Update", "Edit", new { id = result.DeptID }) 
+    </td>
+    <td>
+ |
+        @Html.ActionLink("Delete", "DepartmentDelete", new { id = result.DeptID })
+    </td>
+</tr>
+    }
+</table>

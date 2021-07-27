@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MVC_Version_3.Models.displaySortedData_Result>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        <th>
+            EmployeeId
+        </th>
+
+        <th>
+            Name
+        </th>
+        <th>
+            DOJ
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Department Name
+        </th>
+        <th>
+            Salary Amount
+        </th>
+    </tr>
+    @foreach(var result in Model)
+            {
+<tr>
+    <td>
+        @result.EmployeeId
+    </td>
+
+    <td>
+        @result.Name
+    </td>
+    <td>
+        @result.DOJ
+    </td>
+    <td>
+        @result.Mobile
+    </td>
+    <td>
+        @result.Email
+    </td>
+    <td>
+        @result.Address
+    </td>
+    <td>
+        @result.DptName
+    </td>
+    <td>
+        @result.SalaryAmount
+    </td>
+    <td>
+        @Html.ActionLink("Update", "Edit", new { id = result.EmployeeId})
+    </td>
+    <td>
+        |
+        @Html.ActionLink("Delete", "Delete", new { id = result.EmployeeId })
+    </td>
+</tr>
+            }
+</table>
