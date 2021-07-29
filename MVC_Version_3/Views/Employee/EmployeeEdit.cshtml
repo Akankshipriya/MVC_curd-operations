@@ -1,5 +1,6 @@
 ﻿@model MVC_Version_3.Models.Employee
 
+
 @{
     ViewBag.Title = "Edit";
 }
@@ -16,6 +17,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.EmployeeId)
+    @Html.HiddenFor(model => model.salary.EmployeeId)
 
     <div class="form-group">
         @Html.LabelFor(model => model.DeptID, "DeptID", htmlAttributes: new { @class = "control-label col-md-2" })

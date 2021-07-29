@@ -33,8 +33,9 @@ namespace MVC_Version_3.Controllers
 
         public ActionResult EmployeeDelete(int id)
         {
-            var res = Obj.Employees.Where(x => x.EmployeeId == id).FirstOrDefault();
-            Obj.Employees.Remove(res);
+            //var res = Obj.Employees.Where(x => x.EmployeeId == id).FirstOrDefault();
+            var emp = new Employee() { EmployeeId = id };
+            Obj.Entry(emp).State = EntityState.Deleted;
             Obj.SaveChanges();
 
             var list = Obj.Employees.ToList();
@@ -47,6 +48,7 @@ namespace MVC_Version_3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Employee employee = Obj.Employees.Find(id);
             if (employee == null)
             {
@@ -56,13 +58,14 @@ namespace MVC_Version_3.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EmployeeEdit([Bind(Include = "EmployeeId,DeptID,Name,DOJ,Mobile,Email,Address,Department,salary.SalaryAmount")] Employee employee)
+        public ActionResult EmployeeEdit(Employee employee)
         {
 
             if (ModelState.IsValid)
             {
-              
+          
                 Obj.Entry(employee).State = EntityState.Modified;
+                Obj.Entry(employee.salary).State = EntityState.Modified;
                 Obj.SaveChanges();
                 return RedirectToAction("EmployeeList");
             }
