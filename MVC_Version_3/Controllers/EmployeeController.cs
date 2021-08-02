@@ -22,6 +22,7 @@ namespace MVC_Version_3.Controllers
         {
             Obj.Employees.Add(model);
             Obj.SaveChanges();
+            ModelState.Clear();
             return View();
             
         }

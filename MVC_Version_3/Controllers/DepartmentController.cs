@@ -20,8 +20,10 @@ namespace MVC_Version_3.Controllers
         [HttpPost]
         public ActionResult DepartmentCreate(Department model)
         {
+
             Obj.Departments.Add(model);
             Obj.SaveChanges();
+            ModelState.Clear();
             return View();
             
         }
@@ -55,7 +57,7 @@ namespace MVC_Version_3.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DeptID,DptName,Description1")] Department department)
+        public ActionResult Edit(Department department)
         {
             if (ModelState.IsValid)
             {

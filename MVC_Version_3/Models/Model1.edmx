@@ -32,8 +32,10 @@
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="SalaryAmount" Type="int" />
         </EntityType>
-        <Association Name="FK__Employee__DeptID__3C69FB99">
-          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+        <Association Name="FK_Dept_Emp_Cascade_Delete">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
@@ -44,8 +46,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__salary__Employee__4222D4EF">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+        <Association Name="FK_salary_Emp_Cascade_Delete">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="salary" Type="Self.salary" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Employee">
@@ -58,15 +62,16 @@
         </Association>
         <Function Name="displayData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="displaySortedData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="displaySortedDataRank" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="database_testModelStoreContainer">
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="salary" EntityType="Self.salary" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Employee__DeptID__3C69FB99" Association="Self.FK__Employee__DeptID__3C69FB99">
+          <AssociationSet Name="FK_Dept_Emp_Cascade_Delete" Association="Self.FK_Dept_Emp_Cascade_Delete">
             <End Role="Department" EntitySet="Department" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
-          <AssociationSet Name="FK__salary__Employee__4222D4EF" Association="Self.FK__salary__Employee__4222D4EF">
+          <AssociationSet Name="FK_salary_Emp_Cascade_Delete" Association="Self.FK_salary_Emp_Cascade_Delete">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="salary" EntitySet="salary" />
           </AssociationSet>
@@ -144,6 +149,7 @@
           </AssociationSet>
           <FunctionImport Name="displayData" ReturnType="Collection(database_testModel.displayData_Result)" />
           <FunctionImport Name="displaySortedData" ReturnType="Collection(database_testModel.displaySortedData_Result)" />
+          <FunctionImport Name="displaySortedDataRank" ReturnType="Collection(database_testModel.displaySortedDataRank_Result)" />
         </EntityContainer>
         <ComplexType Name="displayData_Result">
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
@@ -163,6 +169,17 @@
           <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="DptName" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="SalaryAmount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="displaySortedDataRank_Result">
+          <Property Type="Int32" Name="EmployeeId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DOJ" Nullable="true" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DptName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SalaryAmount" Nullable="true" />
+          <Property Type="Int64" Name="Rank" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -224,6 +241,21 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="DptName" ColumnName="DptName" />
                 <ScalarProperty Name="SalaryAmount" ColumnName="SalaryAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="displaySortedDataRank" FunctionName="database_testModel.Store.displaySortedDataRank">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="database_testModel.displaySortedDataRank_Result">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DptName" ColumnName="DptName" />
+                <ScalarProperty Name="SalaryAmount" ColumnName="SalaryAmount" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

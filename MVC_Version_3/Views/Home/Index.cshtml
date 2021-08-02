@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC_Version_3.Models.displaySortedData_Result>
+﻿@model IEnumerable<MVC_Version_3.Models.displaySortedDataRank_Result>
 @{
     ViewBag.Title = "Index";
 }
@@ -6,8 +6,9 @@
 <h2>Index</h2>
 <table class="table">
     <tr>
+
         <th>
-            EmployeeId
+            Employee ID
         </th>
 
         <th>
@@ -31,13 +32,18 @@
         <th>
             Salary Amount
         </th>
+        <th>
+            Rank
+        </th>
     </tr>
     @foreach(var result in Model)
             {
 <tr>
+
     <td>
         @result.EmployeeId
     </td>
+
 
     <td>
         @result.Name
@@ -61,7 +67,10 @@
         @result.SalaryAmount
     </td>
     <td>
-        @Html.ActionLink("Update", "EmployeeEdit","Employee", new { id = result.EmployeeId},null)
+        @result.Rank
+    </td>
+    <td>
+        @Html.ActionLink("Update", "EmployeeEdit", "Employee", new { id = result.EmployeeId }, null)
     </td>
     <td>
         |

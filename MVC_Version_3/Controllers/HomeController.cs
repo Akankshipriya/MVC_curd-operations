@@ -16,7 +16,7 @@ namespace MVC_Version_3.Controllers
         {
             
 
-            return View(obj.displaySortedData());
+            return View(obj.displaySortedDataRank());
         }
         
         public ActionResult Delete(int id)
@@ -25,7 +25,7 @@ namespace MVC_Version_3.Controllers
             obj.Employees.Remove(res);
             obj.SaveChanges();
 
-            var list = obj.displaySortedData().ToList();
+            var list = obj.displaySortedDataRank().ToList();
             return View("Index", list);
         }
 

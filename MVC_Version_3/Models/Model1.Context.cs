@@ -17,8 +17,6 @@ namespace MVC_Version_3.Models
     
     public partial class database_testEntities : DbContext
     {
-        internal object salary;
-
         public database_testEntities()
             : base("name=database_testEntities")
         {
@@ -41,6 +39,11 @@ namespace MVC_Version_3.Models
         public virtual ObjectResult<displaySortedData_Result> displaySortedData()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<displaySortedData_Result>("displaySortedData");
+        }
+    
+        public virtual ObjectResult<displaySortedDataRank_Result> displaySortedDataRank()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<displaySortedDataRank_Result>("displaySortedDataRank");
         }
     }
 }
